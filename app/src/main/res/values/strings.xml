@@ -2,11 +2,11 @@
     <string name="app_name">Calendário Cocó</string>
     <string name="title_activity_today" translatable="false">@string/today</string>
     <string name="title_activity_calendar" translatable="false">@string/calendar</string>
-    <string name="title_activity_cards">@string/all</string>
+    <string name="title_activity_cards" translatable="false">@string/everything</string>
 
     <string name="today">Hoje</string>
     <string name="calendar">Calendário</string>
-    <string name="all">Tudo</string>
+    <string name="everything">Tudo</string>
     <string name="drawer_open">Abrir navigation drawer</string>
     <string name="drawer_close">Fechar navigation drawer</string>
 

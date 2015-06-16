@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -193,13 +194,16 @@ public class MainActivity extends AppCompatActivity {
     private void updateHeader() {
         TextView textView5 = (TextView) findViewById(R.id.textView5);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         if(table.equals("cozinho")) {
             textView5.setText(String.format(getResources().getString(R.string.header_text), "Cózinho"));
             imageView.setImageResource(R.drawable.cozinho);
+            imageView2.setImageResource(R.drawable.cozinha);
         } else {
             textView5.setText(String.format(getResources().getString(R.string.header_text), "Cózinha"));
             imageView.setImageResource(R.drawable.cozinha);
+            imageView2.setImageResource(R.drawable.cozinho);
         }
         String season = ctrl.getSeason();
         if(season.equals("winter")) {
