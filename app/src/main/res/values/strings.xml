@@ -29,6 +29,48 @@
         <item>cozinho</item>
         <item>cozinha</item>
     </string-array>
+    <string name="semana_monday">S</string>
+    <string name="semana_tuesday">T</string>
+    <string name="semana_wednesday">Q</string>
+    <string name="semana_thursday">Q</string>
+    <string name="semana_friday">S</string>
+    <string name="semana_saturday">S</string>
+    <string name="semana_sunday">D</string>
+    <string-array name="array_semana">
+        <item>@string/semana_monday</item>
+        <item>@string/semana_tuesday</item>
+        <item>@string/semana_wednesday</item>
+        <item>@string/semana_thursday</item>
+        <item>@string/semana_friday</item>
+        <item>@string/semana_saturday</item>
+        <item>@string/semana_sunday</item>
+    </string-array>
+    <string name="meses_january">Janeiro</string>
+    <string name="meses_february">Fevereiro</string>
+    <string name="meses_march">Março</string>
+    <string name="meses_april">Abril</string>
+    <string name="meses_may">Maio</string>
+    <string name="meses_june">Junho</string>
+    <string name="meses_july">Julho</string>
+    <string name="meses_august">Agosto</string>
+    <string name="meses_september">Setembro</string>
+    <string name="meses_october">Outubro</string>
+    <string name="meses_november">Novembro</string>
+    <string name="meses_december">Dezembro</string>
+    <string-array name="array_meses">
+        <item>@string/meses_january</item>
+        <item>@string/meses_february</item>
+        <item>@string/meses_march</item>
+        <item>@string/meses_april</item>
+        <item>@string/meses_may</item>
+        <item>@string/meses_june</item>
+        <item>@string/meses_july</item>
+        <item>@string/meses_august</item>
+        <item>@string/meses_september</item>
+        <item>@string/meses_october</item>
+        <item>@string/meses_november</item>
+        <item>@string/meses_december</item>
+    </string-array>
     <string name="cancel">Cancelar</string>
     <string name="settings_summary">És o Cózinho ou a Cózinha?</string>
     <string name="about_message">\nCalendário Cocó\nEsta aplicação foi desenhada para poder acompanhar diariamente as descrições do calendário criado pelos Cocós.\n\nCom muito amor e carinho por\n\nAlberto Ponces\nponces26@gmail.com\n@albertoponces</string>
@@ -36,4 +78,7 @@
     <string name="content_description">Imagem Cózinhos</string>
     <string name="title_section3">Tudo</string>
     <string name="content_description2">Imagem Coração</string>
+    <string name="title_activity_calendar_view">CalendarViewActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

@@ -18,5 +18,24 @@
     <string name="action_about">About</string>
     <string name="content_description">Images Cózinhos</string>
     <string name="content_description2">Image Heart</string>
+    <string name="semana_sunday">S</string>
+    <string name="semana_wednesday">W</string>
+    <string name="semana_thursday">T</string>
+    <string name="semana_saturday">S</string>
+    <string name="semana_monday">M</string>
+    <string name="semana_friday">F</string>
+    <string name="semana_tuesday">T</string>
+    <string name="meses_april">Abril</string>
+    <string name="meses_august">Agosto</string>
+    <string name="meses_december">December</string>
+    <string name="meses_february">February</string>
+    <string name="meses_january">January</string>
+    <string name="meses_july">July</string>
+    <string name="meses_june">June</string>
+    <string name="meses_march">March</string>
+    <string name="meses_may">May</string>
+    <string name="meses_november">November</string>
+    <string name="meses_october">October</string>
+    <string name="meses_september">September</string>
 
 </resources>

@@ -28,6 +28,10 @@
             android:name=".CardsActivity"
             android:label="@string/title_activity_cards" >
         </activity>
+        <activity
+            android:name=".CalendarViewActivity"
+            android:label="@string/title_activity_calendar_view" >
+        </activity>
     </application>
 
 </manifest>

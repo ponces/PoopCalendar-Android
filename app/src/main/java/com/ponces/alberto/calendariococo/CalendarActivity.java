@@ -21,6 +21,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateChangedListener;
+
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -36,7 +40,7 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_calendar);
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -60,12 +64,21 @@ public class CalendarActivity extends AppCompatActivity {
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
+        MaterialCalendarView m = (MaterialCalendarView) findViewById(R.id.calendarView);
+        m.setOnDateChangedListener(new OnDateChangedListener() {
+            @Override
+            public void onDateChanged(MaterialCalendarView materialCalendarView, CalendarDay calendarDay) {
+                Intent intent = new Intent(CalendarActivity.this, CalendarViewActivity.class);
+                intent.putExtra("date", calendarDay.getMonth() + "-" + calendarDay.getDay());
+                startActivity(intent);
+            }
+        });
+
         sharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(this);
         table = sharedPrefs.getString("table_list", "cozinho");
         ctrl = new Controller(this);
         updateHeader();
-        searchDay();
     }
 
     @Override
@@ -120,7 +133,6 @@ public class CalendarActivity extends AppCompatActivity {
         if(!table.equals(table2)) {
             table = table2;
             updateHeader();
-            searchDay();
         }
     }
 
@@ -203,12 +215,5 @@ public class CalendarActivity extends AppCompatActivity {
         } else {
             linearLayout.setBackgroundResource(R.drawable.season);
         }
-    }
-
-    private void searchDay() {
-        ctrl.searchDay("today");
-        String description = ctrl.getDescription();
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(String.format(getResources().getString(R.string.description), description));
     }
 }
