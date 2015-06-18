@@ -43,11 +43,11 @@ public class CalendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calendar);
 
         // Set a Toolbar to replace the ActionBar.
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_toolbar);
         setSupportActionBar(toolbar);
 
         // Find our drawer view
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawer = (DrawerLayout) findViewById(R.id.calendar_drawer_layout);
         drawerToggle = setupDrawerToggle();
 
         // Tie DrawerLayout events to the ActionBarToggle
@@ -60,16 +60,29 @@ public class CalendarActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         // Find our drawer view
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        nvDrawer = (NavigationView) findViewById(R.id.calendar_nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
-        MaterialCalendarView m = (MaterialCalendarView) findViewById(R.id.calendarView);
+        MaterialCalendarView m = (MaterialCalendarView) findViewById(R.id.calendar_calendarView);
         m.setOnDateChangedListener(new OnDateChangedListener() {
             @Override
             public void onDateChanged(MaterialCalendarView materialCalendarView, CalendarDay calendarDay) {
+                String strMonth, strDay;
+                int month = calendarDay.getMonth() + 1;
+                int day = calendarDay.getDay();
+                if(month < 10) {
+                    strMonth = "0" + month;
+                } else {
+                    strMonth = "" + month;
+                }
+                if(day < 10) {
+                    strDay = "0" + day;
+                } else {
+                    strDay = "" + day;
+                }
                 Intent intent = new Intent(CalendarActivity.this, CalendarViewActivity.class);
-                intent.putExtra("date", calendarDay.getMonth() + "-" + calendarDay.getDay());
+                intent.putExtra("date", strMonth + "-" + strDay);
                 startActivity(intent);
             }
         });
@@ -193,14 +206,14 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     private void updateHeader() {
-        TextView textView5 = (TextView) findViewById(R.id.textView5);
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        TextView textView = (TextView) findViewById(R.id.header_textView);
+        ImageView imageView = (ImageView) findViewById(R.id.header_imageView);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.header_linearLayout);
         if(table.equals("cozinho")) {
-            textView5.setText(String.format(getResources().getString(R.string.header_text), "Cózinho"));
+            textView.setText(String.format(getResources().getString(R.string.header_text), "Cózinho"));
             imageView.setImageResource(R.drawable.cozinho);
         } else {
-            textView5.setText(String.format(getResources().getString(R.string.header_text), "Cózinha"));
+            textView.setText(String.format(getResources().getString(R.string.header_text), "Cózinha"));
             imageView.setImageResource(R.drawable.cozinha);
         }
         String season = ctrl.getSeason();

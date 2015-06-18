@@ -1,12 +1,94 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="com.ponces.alberto.calendariococo.CalendarViewActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!-- The ActionBar -->
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- The main content view -->
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/calendarview_relativelayout"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="right">
+            <ImageView
+                android:id="@+id/calendarview_imageView"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bubble_left"
+                android:contentDescription="@string/content_description2" />
+            <TextView
+                android:id="@+id/calendarview_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_alignLeft="@+id/calendarview_imageView"
+                android:layout_alignTop="@+id/calendarview_imageView"
+                android:layout_alignRight="@+id/calendarview_imageView"
+                android:layout_alignBottom="@+id/calendarview_imageView"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/like" />
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/calendarview_imageView2"
+            android:layout_width="@dimen/tab_min_width"
+            android:layout_height="@dimen/tab_min_width"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="left"
+            android:src="@drawable/cozinho"
+            android:contentDescription="@string/content_description" />
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/calendarview_relativelayout3"
+            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="left" >
+            <ImageView
+                android:id="@+id/calendarview_imageView3"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bubble_right"
+                android:contentDescription="@string/content_description2" />
+            <TextView
+                android:id="@+id/calendarview_textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="40dp"
+                android:gravity="center"
+                android:layout_alignLeft="@+id/calendarview_imageView3"
+                android:layout_alignTop="@+id/calendarview_imageView3"
+                android:layout_alignRight="@+id/calendarview_imageView3"
+                android:layout_alignBottom="@+id/calendarview_imageView3"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/description" />
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/calendarview_imageView4"
+            android:layout_width="@dimen/tab_min_width"
+            android:layout_height="@dimen/tab_min_width"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="right"
+            android:src="@drawable/cozinho"
+            android:contentDescription="@string/content_description" />
+    </LinearLayout>
 
 </RelativeLayout>

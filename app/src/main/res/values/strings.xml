@@ -3,6 +3,7 @@
     <string name="title_activity_today" translatable="false">@string/today</string>
     <string name="title_activity_calendar" translatable="false">@string/calendar</string>
     <string name="title_activity_cards" translatable="false">@string/everything</string>
+    <string name="title_activity_calendar_view" translatable="false">@string/calendar</string>
 
     <string name="today">Hoje</string>
     <string name="calendar">Calendário</string>
@@ -76,9 +77,5 @@
     <string name="about_message">\nCalendário Cocó\nEsta aplicação foi desenhada para poder acompanhar diariamente as descrições do calendário criado pelos Cocós.\n\nCom muito amor e carinho por\n\nAlberto Ponces\nponces26@gmail.com\n@albertoponces</string>
     <string name="action_about">Sobre</string>
     <string name="content_description">Imagem Cózinhos</string>
-    <string name="title_section3">Tudo</string>
-    <string name="content_description2">Imagem Coração</string>
-    <string name="title_activity_calendar_view">CalendarViewActivity</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="content_description2">Imagem Bolha</string>
 </resources>

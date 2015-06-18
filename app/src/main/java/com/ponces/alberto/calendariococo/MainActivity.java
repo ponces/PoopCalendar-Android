@@ -42,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Set a Toolbar to replace the ActionBar.
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_toolbar);
         setTitle(R.string.title_activity_today);
         setSupportActionBar(toolbar);
 
         // Find our drawer view
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         drawerToggle = setupDrawerToggle();
 
         // Tie DrawerLayout events to the ActionBarToggle
@@ -60,22 +60,26 @@ public class MainActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         // Find our drawer view
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        nvDrawer = (NavigationView) findViewById(R.id.main_nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
-
-        if(Locale.getDefault().getLanguage().equals("en")) {
-            table = "cozinho";
-        } else {
-            table = "cozinha";
-        }
         sharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(this);
-        sharedPrefs.edit().putString("table_list", table).apply();
+        if(!sharedPrefs.contains("table_list")) {
+            if(Locale.getDefault().getLanguage().equals("en")) {
+                table = "cozinho";
+            } else {
+                table = "cozinha";
+            }
+            sharedPrefs.edit().putString("table_list", table).apply();
+        } else {
+            table = sharedPrefs.getString("table_list", "cozinho");
+        }
         ctrl = new Controller(this);
         updateHeader();
-        searchDay();
+        updateDrawables();
+        updateDescription();
     }
 
     @Override
@@ -130,7 +134,8 @@ public class MainActivity extends AppCompatActivity {
         if(!table.equals(table2)) {
             table = table2;
             updateHeader();
-            searchDay();
+            updateDrawables();
+            updateDescription();
         }
     }
 
@@ -192,18 +197,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateHeader() {
-        TextView textView5 = (TextView) findViewById(R.id.textView5);
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        TextView textView = (TextView) findViewById(R.id.header_textView);
+        ImageView imageView = (ImageView) findViewById(R.id.header_imageView);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.header_linearLayout);
         if(table.equals("cozinho")) {
-            textView5.setText(String.format(getResources().getString(R.string.header_text), "Cózinho"));
+            textView.setText(String.format(getResources().getString(R.string.header_text), "Cózinho"));
             imageView.setImageResource(R.drawable.cozinho);
-            imageView2.setImageResource(R.drawable.cozinha);
         } else {
-            textView5.setText(String.format(getResources().getString(R.string.header_text), "Cózinha"));
+            textView.setText(String.format(getResources().getString(R.string.header_text), "Cózinha"));
             imageView.setImageResource(R.drawable.cozinha);
-            imageView2.setImageResource(R.drawable.cozinho);
         }
         String season = ctrl.getSeason();
         if(season.equals("winter")) {
@@ -219,10 +221,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void searchDay() {
+    private void updateDescription() {
         ctrl.searchDay("today");
         String description = ctrl.getDescription();
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(String.format(getResources().getString(R.string.description), description));
+        TextView textView2 = (TextView) findViewById(R.id.main_textView2);
+        textView2.setText(String.format(getResources().getString(R.string.description), description));
+    }
+
+    private void updateDrawables() {
+        ImageView imageView2 = (ImageView) findViewById(R.id.main_imageView2);
+        ImageView imageView4 = (ImageView) findViewById(R.id.main_imageView4);
+        if(table.equals("cozinho")) {
+            imageView2.setImageResource(R.drawable.cozinha);
+            imageView4.setImageResource(R.drawable.cozinha);
+        } else {
+            imageView2.setImageResource(R.drawable.cozinho);
+            imageView4.setImageResource(R.drawable.cozinho);
+        }
     }
 }
