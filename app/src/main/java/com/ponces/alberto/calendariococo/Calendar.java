@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.PreferenceManager;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -231,6 +232,9 @@ public class Calendar extends SQLiteOpenHelper {
 
         db.execSQL("INSERT OR IGNORE INTO cozinho(date, description) " +
                 "VALUES('02-28', 'Não sabias que no Gmail não é preciso escrever @gmail.com.');");
+
+        db.execSQL("INSERT OR IGNORE INTO cozinho(date, description) " +
+                "VALUES('02-29', 'És o Totó mais bonito que conheço.');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho(date, description) " +
                 "VALUES('03-01', 'Gostas de ir ao cinema.');");
@@ -1127,40 +1131,40 @@ public class Calendar extends SQLiteOpenHelper {
 
     private void insertsCozinhoDia(SQLiteDatabase db) {
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('01-09', '<30', 'Dear Lord.');");
+                "VALUES('01-09', '<30', 'Dear Lord ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('02-09', '<31', 'à Bebé.');");
+                "VALUES('02-09', '<31', 'à Bebé ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('03-09', '<32', 'Marguinhos.');");
+                "VALUES('03-09', '<32', 'Marguinhos ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('04-09', '<33', 'Completos.');");
+                "VALUES('04-09', '<33', 'Completos ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('05-09', '<34', 'do Respeito.');");
+                "VALUES('05-09', '<34', 'do Respeito ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('06-09', '35', 'à Esquimó.');");
+                "VALUES('06-09', '35', 'à Esquimó ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('07-09', '<36', 'Divertidos.');");
+                "VALUES('07-09', '<36', 'Divertidos ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('08-09', '<25', 'das Estrelas.');");
+                "VALUES('08-09', '<25', 'das Estrelas ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('09-09', '<26', 'Doces.');");
+                "VALUES('09-09', '<26', 'Doces ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('10-09', '<27', 'à Velhote.');");
+                "VALUES('10-09', '<27', 'à Velhote ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('11-09', '<28', 'de Borboleta.');");
+                "VALUES('11-09', '<28', 'de Borboleta ♥');");
 
         db.execSQL("INSERT OR IGNORE INTO cozinho_dia(date, heart, description) " +
-                "VALUES('12-09', '<29', 'Complicados.');");
+                "VALUES('12-09', '<29', 'Complicados ♥');");
     }
 
     private void insertsCozinhaDia(SQLiteDatabase db) {
@@ -1186,10 +1190,34 @@ public class Calendar extends SQLiteOpenHelper {
         } else {
             c = db.rawQuery("SELECT description FROM " + table + "_dia WHERE date='" + date + "'", null);
             if (c.moveToFirst()) {
-                heart = c.getString(c.getColumnIndex("heart"));
                 description = "Dás beijinhos " + c.getString(c.getColumnIndex("description"));
             }
         }
         c.close();
+    }
+
+    public String[] getAll(SQLiteDatabase db) {
+        SharedPreferences sharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        String table = sharedPrefs.getString("table_list", "cozinho");
+        String date;
+        ArrayList<String> all = new ArrayList<>();
+        Cursor c, c2;
+        c = db.rawQuery("SELECT date, description FROM " + table, null);
+        c2 = db.rawQuery("SELECT date, description FROM " + table + "_dia", null);
+        c.moveToFirst();
+        c2.moveToFirst();
+        while(!c.isAfterLast()) {
+            date = c.getString(c.getColumnIndex("date"));
+            all.add(c.getString(c.getColumnIndex("date")) + "/" +
+                    c.getString(c.getColumnIndex("description")));
+            if(date.split("-")[1].equals("08")) {
+                all.add(c2.getString(c2.getColumnIndex("date")) + "/" +
+                        "Dás beijinhos " + c2.getString(c2.getColumnIndex("description")));
+                c2.moveToNext();
+            }
+            c.moveToNext();
+        }
+        return all.toArray(new String[all.size()]);
     }
 }

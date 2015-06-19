@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -13,10 +14,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +33,7 @@ public class CardsActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+    private RecyclerView recyclerView;
 
     private Controller ctrl;
     private String table;
@@ -65,7 +71,12 @@ public class CardsActivity extends AppCompatActivity {
         table = sharedPrefs.getString("table_list", "cozinho");
         ctrl = new Controller(this);
         updateHeader();
-        searchDay();
+
+        recyclerView = (RecyclerView) findViewById(R.id.cards_recyclerview);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        updateCards();
     }
 
     @Override
@@ -88,25 +99,8 @@ public class CardsActivity extends AppCompatActivity {
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
 
-            case R.id.action_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-
-            case R.id.action_about:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(R.string.action_about);
-                TextView msg = new TextView(this);
-                msg.setText(R.string.about_message);
-                msg.setGravity(Gravity.CENTER);
-                builder.setView(msg);
-                builder.setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+            case R.id.action_refresh:
+                updateCards();
                 return true;
         }
 
@@ -120,7 +114,7 @@ public class CardsActivity extends AppCompatActivity {
         if(!table.equals(table2)) {
             table = table2;
             updateHeader();
-            searchDay();
+            updateCards();
         }
     }
 
@@ -146,7 +140,7 @@ public class CardsActivity extends AppCompatActivity {
         // Create a new fragment and specify the planet to show based on
         // position
         Intent intent = new Intent();
-        boolean flag = true;
+        boolean start = true, settings = false;
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
                 intent = new Intent(this, MainActivity.class);
@@ -155,18 +149,46 @@ public class CardsActivity extends AppCompatActivity {
                 intent = new Intent(this, CalendarActivity.class);
                 break;
             case R.id.nav_third_fragment:
-                flag = false;
+                start = false;
+                break;
+            case R.id.nav_fourth_fragment:
+                intent = new Intent(this, SettingsActivity.class);
+                settings = true;
+                break;
+            case R.id.nav_fifth_fragment:
+                showAboutDialog();
+                start = false;
                 break;
             default:
                 intent = new Intent(this, MainActivity.class);
         }
-        if(flag) {
+        if(start) {
             startActivity(intent);
+            if(!settings) {
+                // Highlight the selected item, update the title, and close the drawer
+                menuItem.setChecked(true);
+                setTitle(menuItem.getTitle());
+                finish();
+            }
         }
-        // Highlight the selected item, update the title, and close the drawer
-        menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
         mDrawer.closeDrawers();
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.about);
+        TextView msg = new TextView(this);
+        msg.setText(R.string.about_message);
+        msg.setGravity(Gravity.CENTER);
+        builder.setView(msg);
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
@@ -205,10 +227,156 @@ public class CardsActivity extends AppCompatActivity {
         }
     }
 
-    private void searchDay() {
-        ctrl.searchDay("today");
-        String description = ctrl.getDescription();
-        TextView textView = (TextView) findViewById(R.id.cards_textView);
-        textView.setText(String.format(getResources().getString(R.string.description), description));
+    private void updateCards() {
+        String[] strings = ctrl.getAll();
+        String[] cards = new String[strings.length];
+        for(int i = 0; i < strings.length; i++) {
+            cards[i] = printDay(strings[i].split("/")[0]);
+            cards[i] += "\n\nGosto de ti porque...\n";
+            cards[i] += strings[i].split("/")[1];
+        }
+        RecyclerAdapter adapter = new RecyclerAdapter(cards);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private String printDay(String date) {
+        int day = Integer.parseInt(date.split("-")[1]);
+        String strDate = "";
+        int month = Integer.parseInt(date.split("-")[0]);
+        switch(day) {
+            case 1:
+                strDate = this.getString(R.string.day_1);
+                break;
+            case 2:
+                strDate = this.getString(R.string.day_2);
+                break;
+            case 3:
+                strDate = this.getString(R.string.day_3);
+                break;
+            case 4:
+                strDate = this.getString(R.string.day_4);
+                break;
+            case 5:
+                strDate = this.getString(R.string.day_5);
+                break;
+            case 6:
+                strDate = this.getString(R.string.day_6);
+                break;
+            case 7:
+                strDate = this.getString(R.string.day_7);
+                break;
+            case 8:
+                strDate = this.getString(R.string.day_8);
+                break;
+            case 9:
+                strDate = this.getString(R.string.day_9);
+                break;
+            case 10:
+                strDate = this.getString(R.string.day_10);
+                break;
+            case 11:
+                strDate = this.getString(R.string.day_11);
+                break;
+            case 12:
+                strDate = this.getString(R.string.day_12);
+                break;
+            case 13:
+                strDate = this.getString(R.string.day_13);
+                break;
+            case 14:
+                strDate = this.getString(R.string.day_14);
+                break;
+            case 15:
+                strDate = this.getString(R.string.day_15);
+                break;
+            case 16:
+                strDate = this.getString(R.string.day_16);
+                break;
+            case 17:
+                strDate = this.getString(R.string.day_17);
+                break;
+            case 18:
+                strDate = this.getString(R.string.day_18);
+                break;
+            case 19:
+                strDate = this.getString(R.string.day_19);
+                break;
+            case 20:
+                strDate = this.getString(R.string.day_20);
+                break;
+            case 21:
+                strDate = this.getString(R.string.day_21);
+                break;
+            case 22:
+                strDate = this.getString(R.string.day_22);
+                break;
+            case 23:
+                strDate = this.getString(R.string.day_23);
+                break;
+            case 24:
+                strDate = this.getString(R.string.day_24);
+                break;
+            case 25:
+                strDate = this.getString(R.string.day_25);
+                break;
+            case 26:
+                strDate = this.getString(R.string.day_26);
+                break;
+            case 27:
+                strDate = this.getString(R.string.day_27);
+                break;
+            case 28:
+                strDate = this.getString(R.string.day_28);
+                break;
+            case 29:
+                strDate = this.getString(R.string.day_29);
+                break;
+            case 30:
+                strDate = this.getString(R.string.day_30);
+                break;
+            case 31:
+                strDate = this.getString(R.string.day_31);
+                break;
+        }
+        strDate +=  " " + this.getString(R.string.date_separator) + " ";
+        switch(month) {
+            case 1:
+                strDate += this.getString(R.string.meses_january);
+                break;
+            case 2:
+                strDate += this.getString(R.string.meses_february);
+                break;
+            case 3:
+                strDate += this.getString(R.string.meses_march);
+                break;
+            case 4:
+                strDate += this.getString(R.string.meses_april);
+                break;
+            case 5:
+                strDate += this.getString(R.string.meses_may);
+                break;
+            case 6:
+                strDate += this.getString(R.string.meses_june);
+                break;
+            case 7:
+                strDate += this.getString(R.string.meses_july);
+                break;
+            case 8:
+                strDate += this.getString(R.string.meses_august);
+                break;
+            case 9:
+                strDate += this.getString(R.string.meses_september);
+                break;
+            case 10:
+                strDate += this.getString(R.string.meses_october);
+                break;
+            case 11:
+                strDate += this.getString(R.string.meses_november);
+                break;
+            case 12:
+                strDate += this.getString(R.string.meses_december);
+                break;
+        }
+        return strDate;
     }
 }

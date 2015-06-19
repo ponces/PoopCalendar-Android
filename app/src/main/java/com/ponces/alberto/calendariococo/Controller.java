@@ -36,6 +36,10 @@ public class Controller {
         cal.searchDay(cal.getReadableDatabase(), date);
     }
 
+    public String[] getAll() {
+        return cal.getAll(cal.getReadableDatabase());
+    }
+
     public String getSeason() {
         SimpleDateFormat df = new SimpleDateFormat("MM-dd");
         String date = df.format(new Date());

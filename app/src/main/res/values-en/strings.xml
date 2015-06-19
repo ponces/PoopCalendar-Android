@@ -4,20 +4,24 @@
     <string name="today">Today</string>
     <string name="calendar">Calendar</string>
     <string name="everything">Everything</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="refresh">Refresh</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
     <string name="cancel">Cancel</string>
+    <string name="settings_summary">Are you Cózinho or Cózinha?</string>
     <string name="pref_header_general">General</string>
     <string name="pref_title_table_name">Name</string>
-    <string name="title_activity_settings">Settings</string>
-    <string name="title_section3">All</string>
-    <string name="settings_summary">Are you Cózinho or Cózinha?</string>
-    <string name="about_message">\nPoop Calendar\nThis app was designed to keep up with daily descriptions of the calendar created by Cocós.\n\nWith lots of love and caress by\n\nAlberto Ponces\nponces26@gmail.com\n@albertoponces</string>
-    <string name="action_about">About</string>
+
     <string name="content_description">Images Cózinhos</string>
     <string name="content_description2">Image Heart</string>
+
+    <string name="about_message">\nPoop Calendar\nThis app was designed to keep up with daily
+        descriptions of the calendar created by Cocós.\n\nWith lots of love and caress by
+        \n\nAlberto Ponces\nponces26@gmail.com\n@albertoponces</string>
+
     <string name="semana_sunday">S</string>
     <string name="semana_wednesday">W</string>
     <string name="semana_thursday">T</string>
@@ -37,5 +41,37 @@
     <string name="meses_november">November</string>
     <string name="meses_october">October</string>
     <string name="meses_september">September</string>
+    <string name="date_separator">of</string>
+    <string name="day_1">1st</string>
+    <string name="day_2">2nd</string>
+    <string name="day_3">3rd</string>
+    <string name="day_4">4th</string>
+    <string name="day_5">5th</string>
+    <string name="day_6">6th</string>
+    <string name="day_7">7th</string>
+    <string name="day_8">8th</string>
+    <string name="day_9">9th</string>
+    <string name="day_10">10th</string>
+    <string name="day_11">11st</string>
+    <string name="day_12">12nd</string>
+    <string name="day_13">13rd</string>
+    <string name="day_14">14th</string>
+    <string name="day_15">15th</string>
+    <string name="day_16">16th</string>
+    <string name="day_17">17th</string>
+    <string name="day_18">18th</string>
+    <string name="day_19">19th</string>
+    <string name="day_20">20th</string>
+    <string name="day_21">21st</string>
+    <string name="day_22">22nd</string>
+    <string name="day_23">23rd</string>
+    <string name="day_24">24th</string>
+    <string name="day_25">25th</string>
+    <string name="day_26">26th</string>
+    <string name="day_27">27th</string>
+    <string name="day_28">28th</string>
+    <string name="day_29">29th</string>
+    <string name="day_30">30th</string>
+    <string name="day_31">31st</string>
 
 </resources>

@@ -114,25 +114,7 @@ public class CalendarActivity extends AppCompatActivity {
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
 
-            case R.id.action_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-
-            case R.id.action_about:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(R.string.action_about);
-                TextView msg = new TextView(this);
-                msg.setText(R.string.about_message);
-                msg.setGravity(Gravity.CENTER);
-                builder.setView(msg);
-                builder.setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+            case R.id.action_refresh:
                 return true;
         }
 
@@ -171,27 +153,55 @@ public class CalendarActivity extends AppCompatActivity {
         // Create a new fragment and specify the planet to show based on
         // position
         Intent intent = new Intent();
-        boolean flag = true;
+        boolean start = true, settings = false;
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
                 intent = new Intent(this, MainActivity.class);
                 break;
             case R.id.nav_second_fragment:
-                flag = false;
+                start = false;
                 break;
             case R.id.nav_third_fragment:
                 intent = new Intent(this, CardsActivity.class);
                 break;
+            case R.id.nav_fourth_fragment:
+                intent = new Intent(this, SettingsActivity.class);
+                settings = true;
+                break;
+            case R.id.nav_fifth_fragment:
+                showAboutDialog();
+                start = false;
+                break;
             default:
                 intent = new Intent(this, MainActivity.class);
         }
-        if(flag) {
+        if(start) {
             startActivity(intent);
+            if(!settings) {
+                // Highlight the selected item, update the title, and close the drawer
+                menuItem.setChecked(true);
+                setTitle(menuItem.getTitle());
+                finish();
+            }
         }
-        // Highlight the selected item, update the title, and close the drawer
-        menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
         mDrawer.closeDrawers();
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.about);
+        TextView msg = new TextView(this);
+        msg.setText(R.string.about_message);
+        msg.setGravity(Gravity.CENTER);
+        builder.setView(msg);
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override

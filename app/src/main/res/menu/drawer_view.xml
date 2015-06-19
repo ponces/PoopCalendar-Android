@@ -1,5 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_first_fragment"
@@ -13,5 +12,15 @@
             android:id="@+id/nav_third_fragment"
             android:icon="@drawable/ic_all"
             android:title="@string/everything" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_fourth_fragment"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/nav_fifth_fragment"
+            android:icon="@drawable/ic_about"
+            android:title="@string/about" />
     </group>
 </menu>
