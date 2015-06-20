@@ -32,6 +32,11 @@
             android:name=".CalendarViewActivity"
             android:label="@string/title_activity_calendar_view" >
         </activity>
+        <service android:name=".AlarmService"
+            android:enabled="true" />
+
+        <receiver android:name=".AlarmReceiver"/>
     </application>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

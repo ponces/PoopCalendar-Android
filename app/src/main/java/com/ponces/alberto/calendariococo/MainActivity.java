@@ -1,10 +1,14 @@
 package com.ponces.alberto.calendariococo;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Locale;
+import java.util.*;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         updateHeader();
         updateDrawables();
         updateDescription();
+        //createService();
     }
 
     @Override
@@ -248,5 +253,17 @@ public class MainActivity extends AppCompatActivity {
             imageView2.setImageResource(R.drawable.cozinho);
             imageView4.setImageResource(R.drawable.cozinho);
         }
+    }
+
+    private void createService() {
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        c.add(java.util.Calendar.SECOND, 2);
+        //c.set(java.util.Calendar.HOUR_OF_DAY, 8);
+        //c.set(java.util.Calendar.MINUTE, 00);
+        //c.set(java.util.Calendar.SECOND, 00);
+        long firstTime = c.getTimeInMillis();
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP, firstTime,
+                PendingIntent.getBroadcast(this, 0, new Intent(this, AlarmReceiver.class), 0));
     }
 }
