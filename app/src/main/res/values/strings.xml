@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Calendário Cocó</string>
     <string name="title_activity_today" translatable="false">@string/today</string>
@@ -19,11 +20,13 @@
     <string name="like" translatable="false">Gosto de ti porque…</string>
     <string name="description" translatable="false">%1$s</string>
     <string name="heart" translatable="false">%1$s</string>
+    <string name="congratulations">Parabéns a nós!!</string>
 
+    <string name="ok" translatable="false">OK</string>
     <string name="cancel">Cancelar</string>
-    <string name="settings_summary">És o Cózinho ou a Cózinha?</string>
     <string name="pref_header_general">Geral</string>
-    <string name="pref_title_table_name">Nome</string>
+    <string name="pref_header_notifications">Notificações</string>
+    <string name="pref_title_table_name">Quem és tu?</string>
     <string name="cozinho" translatable="false">Cózinho</string>
     <string name="cozinha" translatable="false">Cózinha</string>
     <string name="header_text" translatable="false">%1$s</string>
@@ -35,6 +38,7 @@
         <item>cozinho</item>
         <item>cozinha</item>
     </string-array>
+    <string name="pref_title_notification_hour">Hora da notificação</string>
 
     <string name="content_description">Imagem Cózinhos</string>
     <string name="content_description2">Imagem Bolha</string>

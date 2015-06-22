@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,7 +29,7 @@
                 android:id="@+id/main_imageView"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bubble_left_brown"
+                android:src="@drawable/bubble_left_light_brown"
                 android:contentDescription="@string/content_description2" />
             <TextView
                 android:id="@+id/main_textView"
@@ -66,7 +67,7 @@
                 android:id="@+id/main_imageView3"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bubble_right_brown"
+                android:src="@drawable/bubble_right_light_brown"
                 android:contentDescription="@string/content_description2" />
             <TextView
                 android:id="@+id/main_textView2"

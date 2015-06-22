@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreference
+        android:key="switch_notifications"
+        android:title="Notifications"
+        android:defaultValue="true"
+        />
+    <com.ponces.alberto.calendariococo.TimePreference
+        android:key="notification_hour"
+        android:title="@string/pref_title_notification_hour"
+        android:dialogTitle="" />
+</PreferenceScreen>

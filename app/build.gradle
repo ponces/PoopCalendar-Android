@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'PoncesKey'
+            keyPassword 'A_p2523786'
+            storeFile file('/home/alberto/ponces.jks')
+            storePassword 'A_p2523786'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion "23.0.0 rc2"
     defaultConfig {
@@ -14,6 +22,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     productFlavors {

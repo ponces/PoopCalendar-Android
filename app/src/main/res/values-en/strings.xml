@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Poop Calendar</string>
 
@@ -10,10 +11,13 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <string name="congratulations">Congratulations to us!!</string>
+
     <string name="cancel">Cancel</string>
-    <string name="settings_summary">Are you Cózinho or Cózinha?</string>
     <string name="pref_header_general">General</string>
-    <string name="pref_title_table_name">Name</string>
+    <string name="pref_header_notifications">Notifications</string>
+    <string name="pref_title_table_name">Who are you?</string>
+    <string name="pref_title_notification_hour">Notification hour</string>
 
     <string name="content_description">Images Cózinhos</string>
     <string name="content_description2">Image Heart</string>

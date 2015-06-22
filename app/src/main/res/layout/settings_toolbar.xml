@@ -3,12 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settings_toolbar"
-    app:theme="@style/ThemeOverlay.AppCompat.Light"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:theme="@style/ThemeOverlay.AppCompat.Light"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     android:minHeight="?attr/actionBarSize"
     android:fitsSystemWindows="true"
     app:navigationContentDescription="@string/abc_action_bar_up_description"
-    android:background="?attr/colorPrimary"
-    app:navigationIcon="@drawable/ic_back"
-    app:title="@string/title_activity_settings" />
+    android:background="?attr/colorPrimary" />

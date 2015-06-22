@@ -10,11 +10,13 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import java.sql.Time;
 import java.util.List;
 
 /**
@@ -37,6 +39,8 @@ public class SettingsActivity extends PreferenceActivity {
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
+    private static boolean switchOff = false;
+    private static TimePreference timePreference;
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class SettingsActivity extends PreferenceActivity {
         LinearLayout root = (LinearLayout)findViewById(android.R.id.list).getParent().getParent().getParent();
         Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.settings_toolbar, root, false);
         root.addView(bar, 0); // insert at top
+        bar.setTitle(R.string.title_activity_settings);
+        bar.setNavigationIcon(R.drawable.ic_back);
         bar.setTitleTextColor(0xFFFFFFFF);
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +77,11 @@ public class SettingsActivity extends PreferenceActivity {
 
         // Add 'general' preferences.
         addPreferencesFromResource(R.xml.pref_general);
+        addPreferencesFromResource(R.xml.pref_notifications);
 
         bindPreferenceSummaryToValue(findPreference("table_list"));
+        bindPreferenceSummaryToValue(findPreference("notification_hour"));
+        bindPreferenceSummaryToValue(findPreference("switch_notifications"));
     }
 
     /**
@@ -124,7 +133,6 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
-
             if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
                 // the preference's 'entries' list.
@@ -136,6 +144,10 @@ public class SettingsActivity extends PreferenceActivity {
                         index >= 0
                                 ? listPreference.getEntries()[index]
                                 : null);
+            } else if(preference instanceof SwitchPreference) {
+                SwitchPreference switchPreference = (SwitchPreference) preference;
+                SettingsActivity.switchOff = switchPreference.isChecked();
+                timePreference.setEnabled(!switchOff);
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
@@ -158,12 +170,24 @@ public class SettingsActivity extends PreferenceActivity {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
-        // Trigger the listener immediately with the preference's
-        // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+        if(preference instanceof SwitchPreference) {
+            // Trigger the listener immediately with the preference's
+            // current value.
+            sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
+                    PreferenceManager
+                            .getDefaultSharedPreferences(preference.getContext())
+                            .getBoolean(preference.getKey(), true));
+        } else if(preference instanceof TimePreference) {
+            // Don't bind this preference
+            timePreference = (TimePreference) preference;
+        } else {
+            // Trigger the listener immediately with the preference's
+            // current value.
+            sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
+                    PreferenceManager
+                            .getDefaultSharedPreferences(preference.getContext())
+                            .getString(preference.getKey(), ""));
+        }
     }
 
     /**
@@ -177,6 +201,21 @@ public class SettingsActivity extends PreferenceActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
             bindPreferenceSummaryToValue(findPreference("table_list"));
+        }
+    }
+
+    /**
+     * This fragment shows general preferences only. It is used when the
+     * activity is showing a two-pane settings UI.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class NotificationsPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_notifications);
+            bindPreferenceSummaryToValue(findPreference("notification_hour"));
+            bindPreferenceSummaryToValue(findPreference("switch_notifications"));
         }
     }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="brown" type="color">#593E1A</item>
-    <item name="dark_brown" type="color">#FF4F331A</item>
-    <item name="white" type="color">#FFFFFFFF</item>
+    <item name="light_brown" type="color">#997B52</item>
+    <item name="dark_brown" type="color">#3C2609</item>
+    <item name="white" type="color">#FFFFFF</item>
     <item name="grey" type="color">#9E9E9E</item>
 </resources>
