@@ -1,7 +1,11 @@
 package com.ponces.alberto.calendariococo;
 
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import java.sql.Time;
 import java.util.List;
 
 /**
@@ -39,21 +42,21 @@ public class SettingsActivity extends PreferenceActivity {
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
-    private static boolean switchOff = false;
+    private static boolean first;
     private static TimePreference timePreference;
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
+        first = true;
         setupSimplePreferencesScreen();
 
         LinearLayout root = (LinearLayout)findViewById(android.R.id.list).getParent().getParent().getParent();
         Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.settings_toolbar, root, false);
         root.addView(bar, 0); // insert at top
         bar.setTitle(R.string.title_activity_settings);
-        bar.setNavigationIcon(R.drawable.ic_back);
         bar.setTitleTextColor(0xFFFFFFFF);
+        bar.setNavigationIcon(R.drawable.ic_back);
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +83,7 @@ public class SettingsActivity extends PreferenceActivity {
         addPreferencesFromResource(R.xml.pref_notifications);
 
         bindPreferenceSummaryToValue(findPreference("table_list"));
-        bindPreferenceSummaryToValue(findPreference("notification_hour"));
+        timePreference = (TimePreference) findPreference("notification_hour");
         bindPreferenceSummaryToValue(findPreference("switch_notifications"));
     }
 
@@ -133,6 +136,7 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
+            boolean switchOn;
             if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
                 // the preference's 'entries' list.
@@ -146,8 +150,23 @@ public class SettingsActivity extends PreferenceActivity {
                                 : null);
             } else if(preference instanceof SwitchPreference) {
                 SwitchPreference switchPreference = (SwitchPreference) preference;
-                SettingsActivity.switchOff = switchPreference.isChecked();
-                timePreference.setEnabled(!switchOff);
+                SharedPreferences sharedPreferences = PreferenceManager
+                        .getDefaultSharedPreferences(preference.getContext());
+                if (first) {
+                    switchOn = switchPreference.isChecked();
+                    first = false;
+                } else {
+                    switchOn = !switchPreference.isChecked();
+                }
+                timePreference.setEnabled(switchOn);
+                boolean bool = (boolean) value;
+                if (bool) {
+                    timePreference.createNotification();
+                } else {
+                    timePreference.cancelNotification();
+                }
+            } else if(preference instanceof TimePreference) {
+                timePreference.createNotification();
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
@@ -177,9 +196,6 @@ public class SettingsActivity extends PreferenceActivity {
                     PreferenceManager
                             .getDefaultSharedPreferences(preference.getContext())
                             .getBoolean(preference.getKey(), true));
-        } else if(preference instanceof TimePreference) {
-            // Don't bind this preference
-            timePreference = (TimePreference) preference;
         } else {
             // Trigger the listener immediately with the preference's
             // current value.

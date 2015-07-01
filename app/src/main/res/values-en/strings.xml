@@ -22,9 +22,10 @@
     <string name="content_description">Images Cózinhos</string>
     <string name="content_description2">Image Heart</string>
 
-    <string name="about_message">\nPoop Calendar\nThis app was designed to keep up with daily
-        descriptions of the calendar created by Cocós.\n\nWith lots of love and caress by
-        \n\nAlberto Ponces\nponces26@gmail.com\n@albertoponces</string>
+    <string name="about_message">\n<b>Poop Calendar</b>\nThis app was designed to keep up with daily
+        descriptions of the calendar created by Cocós.\n\n<b>With lots of love and caress by</b>
+        \nAlberto Ponces\nponces26@gmail.com\n\n<b>Contributors</b>\nRita Correia\nHugo Marinho
+    </string>
 
     <string name="semana_sunday">S</string>
     <string name="semana_wednesday">W</string>

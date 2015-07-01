@@ -63,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
-        sharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         if(!sharedPrefs.contains("table_list")) {
             if(Locale.getDefault().getLanguage().equals("en")) {
                 table = "cozinho";

@@ -87,8 +87,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        sharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         table = sharedPrefs.getString("table_list", "cozinho");
         ctrl = new Controller(this);
         updateHeader();

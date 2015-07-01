@@ -5,8 +5,7 @@
     <SwitchPreference
         android:key="switch_notifications"
         android:title="Notifications"
-        android:defaultValue="true"
-        />
+        android:defaultValue="true" />
     <com.ponces.alberto.calendariococo.TimePreference
         android:key="notification_hour"
         android:title="@string/pref_title_notification_hour"

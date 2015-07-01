@@ -63,8 +63,7 @@ public class CardsActivity extends AppCompatActivity {
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
-        sharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         table = sharedPrefs.getString("table_list", "cozinho");
         ctrl = new Controller(this);
         updateHeader();

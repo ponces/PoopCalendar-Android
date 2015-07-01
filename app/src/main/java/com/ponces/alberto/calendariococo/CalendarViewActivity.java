@@ -33,8 +33,7 @@ public class CalendarViewActivity extends ActionBarActivity {
         if(extras != null) {
             date = extras.getString("date");
         }
-        SharedPreferences sharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         table = sharedPrefs.getString("table_list", "cozinho");
         ctrl = new Controller(this);
         updateDrawables();
