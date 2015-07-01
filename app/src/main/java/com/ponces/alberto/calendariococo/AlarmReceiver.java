@@ -28,16 +28,16 @@ public class AlarmReceiver extends BroadcastReceiver {
         boolean enabled = sharedPreferences.getBoolean("switch_notifications", true);
         if(enabled) {
             showNotification();
-            if(intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
+            if(Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
                 java.util.Calendar c = java.util.Calendar.getInstance();
                 c.setTimeInMillis(System.currentTimeMillis());
-                String[] time = PreferenceManager.getDefaultSharedPreferences(context)
-                        .getString("notification_hour", "08:00").split(":");
-                c.set(java.util.Calendar.HOUR_OF_DAY, Integer.parseInt(time[0]));
-                c.set(java.util.Calendar.MINUTE, Integer.parseInt(time[1]));
+                c.set(java.util.Calendar.HOUR_OF_DAY, 8);
+                c.set(java.util.Calendar.MINUTE, 0);
                 c.set(java.util.Calendar.SECOND, 0);
                 AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                am.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 24 * 60 * 60 * 1000,
+                long timeChosen = PreferenceManager.getDefaultSharedPreferences(context)
+                        .getLong("notification_hour", c.getTimeInMillis());
+                am.setRepeating(AlarmManager.RTC_WAKEUP, timeChosen, 24 * 60 * 60 * 1000,
                         PendingIntent.getBroadcast(context, 0, new Intent(context, AlarmReceiver.class), 0));
             }
         }
@@ -47,7 +47,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         Controller ctrl = new Controller(context);
         ctrl.searchDay("today");
         String description = ctrl.getDescription();
-        String summary = description;
         SimpleDateFormat df = new SimpleDateFormat("dd");
         int day = Integer.parseInt(df.format(new Date()));
         NotificationCompat.Builder builder;
@@ -56,22 +55,12 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (day == 9) {
             builder.setContentTitle(context.getString(R.string.congratulations));
             builder.setContentText(context.getString(R.string.like) + " " + description);
-            int max = 19;
-            if(summary.length() > max) {
-                summary = description.substring(0, max);
-                builder.setContentText(context.getString(R.string.like) + " " + summary + "...");
-                builder.setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(context.getString(R.string.like) + " " + description));
-            }
+            builder.setStyle(new NotificationCompat.BigTextStyle()
+                    .bigText(context.getString(R.string.like) + " " + description));
         } else {
             builder.setContentTitle(context.getString(R.string.like));
             builder.setContentText(description);
-            int max = 39;
-            if(summary.length() > max) {
-                summary = description.substring(0, max);
-                builder.setStyle(new NotificationCompat.BigTextStyle().bigText(description));
-                builder.setContentText(summary + "...");
-            }
+            builder.setStyle(new NotificationCompat.BigTextStyle().bigText(description));
         }
         builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
         builder.setVibrate(new long[] {0, 250, 250, 250});

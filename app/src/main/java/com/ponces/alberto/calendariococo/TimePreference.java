@@ -73,18 +73,6 @@ public class TimePreference extends DialogPreference {
                 notifyChanged();
             }
         }
-
-        java.util.Calendar c = java.util.Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("HH");
-        if(Integer.parseInt(df.format(new Date())) > 10) {
-
-        }
-        c.setTimeInMillis(System.currentTimeMillis());
-        String[] time = "23:00".split(":");
-        c.set(java.util.Calendar.HOUR_OF_DAY, Integer.parseInt(time[0]));
-        c.set(java.util.Calendar.MINUTE, Integer.parseInt(time[1]));
-        c.set(java.util.Calendar.SECOND, 00);
-        System.out.println("Time: " + c.getTimeInMillis());
     }
 
     @Override
@@ -122,13 +110,13 @@ public class TimePreference extends DialogPreference {
     public void createNotification() {
         java.util.Calendar c = java.util.Calendar.getInstance();
         c.setTimeInMillis(System.currentTimeMillis());
-        String[] time = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString("notification_hour", "08:00").split(":");
-        c.set(java.util.Calendar.HOUR_OF_DAY, Integer.parseInt(time[0]));
-        c.set(java.util.Calendar.MINUTE, Integer.parseInt(time[1]));
+        c.set(java.util.Calendar.HOUR_OF_DAY, 8);
+        c.set(java.util.Calendar.MINUTE, 0);
         c.set(java.util.Calendar.SECOND, 0);
+        long timeChosen = PreferenceManager.getDefaultSharedPreferences(context)
+                .getLong("notification_hour", c.getTimeInMillis());
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 24 * 60 * 60 * 1000,
+        am.setRepeating(AlarmManager.RTC_WAKEUP, timeChosen, 24 * 60 * 60 * 1000,
                 PendingIntent.getBroadcast(context, 0, new Intent(context, AlarmReceiver.class), 0));
     }
 
