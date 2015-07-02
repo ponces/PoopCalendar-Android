@@ -14,8 +14,7 @@ import android.view.View;
 import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 /**
  * Created by alberto on 22/06/15.
@@ -39,10 +38,11 @@ public class TimePreference extends DialogPreference {
     public TimePreference(Context ctxt, AttributeSet attrs, int defStyle) {
         super(ctxt, attrs, defStyle);
         this.context = ctxt;
-
         setPositiveButtonText(R.string.ok);
         setNegativeButtonText(R.string.cancel);
         calendar = new GregorianCalendar();
+        calendar.set(java.util.Calendar.HOUR_OF_DAY, 8);
+        calendar.set(java.util.Calendar.MINUTE, 0);
     }
 
     @Override
@@ -71,6 +71,7 @@ public class TimePreference extends DialogPreference {
             if (callChangeListener(calendar.getTimeInMillis())) {
                 persistLong(calendar.getTimeInMillis());
                 notifyChanged();
+                createNotification();
             }
         }
     }
@@ -115,6 +116,10 @@ public class TimePreference extends DialogPreference {
         c.set(java.util.Calendar.SECOND, 0);
         long timeChosen = PreferenceManager.getDefaultSharedPreferences(context)
                 .getLong("notification_hour", c.getTimeInMillis());
+        c.setTimeInMillis(timeChosen);
+        if(java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY) > c.get(java.util.Calendar.HOUR_OF_DAY)) {
+            timeChosen += 24 * 60 * 60 * 1000;
+        }
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, timeChosen, 24 * 60 * 60 * 1000,
                 PendingIntent.getBroadcast(context, 0, new Intent(context, AlarmReceiver.class), 0));

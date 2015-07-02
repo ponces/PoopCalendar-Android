@@ -34,7 +34,7 @@
         <item>@string/cozinho</item>
         <item>@string/cozinha</item>
     </string-array>
-    <string-array name="pref_table_list_values">
+    <string-array name="pref_table_list_values" translatable="false">
         <item>cozinho</item>
         <item>cozinha</item>
     </string-array>

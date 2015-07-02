@@ -187,7 +187,7 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     private void showAboutDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogStyle);
         builder.setTitle(R.string.about);
         TextView msg = new TextView(this);
         msg.setText(R.string.about_message);

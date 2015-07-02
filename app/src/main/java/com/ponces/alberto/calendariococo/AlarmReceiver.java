@@ -34,9 +34,12 @@ public class AlarmReceiver extends BroadcastReceiver {
                 c.set(java.util.Calendar.HOUR_OF_DAY, 8);
                 c.set(java.util.Calendar.MINUTE, 0);
                 c.set(java.util.Calendar.SECOND, 0);
-                AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                 long timeChosen = PreferenceManager.getDefaultSharedPreferences(context)
-                        .getLong("notification_hour", c.getTimeInMillis());
+                        .getLong("notification_hour", c.getTimeInMillis());c.setTimeInMillis(timeChosen);
+                if(java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY) > c.get(java.util.Calendar.HOUR_OF_DAY)) {
+                    timeChosen += 24 * 60 * 60 * 1000;
+                }
+                AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                 am.setRepeating(AlarmManager.RTC_WAKEUP, timeChosen, 24 * 60 * 60 * 1000,
                         PendingIntent.getBroadcast(context, 0, new Intent(context, AlarmReceiver.class), 0));
             }

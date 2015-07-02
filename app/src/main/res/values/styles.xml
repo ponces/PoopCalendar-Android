@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/brown</item>
         <item name="colorPrimaryDark">@color/brown</item>
-        <item name="colorAccent">@color/grey</item>
+        <item name="colorAccent">@color/brown</item>
+        <item name="android:dialogTheme">@style/MyDialogStyle</item>
+        <item name="android:alertDialogTheme">@style/MyDialogStyle</item>
     </style>
 
+    <style name="MyDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown</item>
+        <item name="colorAccent">@color/brown</item>
+    </style>
 </resources>

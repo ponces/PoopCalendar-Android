@@ -165,8 +165,6 @@ public class SettingsActivity extends PreferenceActivity {
                 } else {
                     timePreference.cancelNotification();
                 }
-            } else if(preference instanceof TimePreference) {
-                timePreference.createNotification();
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
