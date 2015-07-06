@@ -21,23 +21,19 @@ import java.util.*;
  */
 public class TimePreference extends DialogPreference {
 
-    private Context context;
     private java.util.Calendar calendar;
     private TimePicker picker = null;
 
     public TimePreference(Context ctxt) {
         this(ctxt, null);
-        this.context = ctxt;
     }
 
     public TimePreference(Context ctxt, AttributeSet attrs) {
         this(ctxt, attrs, android.R.attr.dialogPreferenceStyle);
-        this.context = ctxt;
     }
 
     public TimePreference(Context ctxt, AttributeSet attrs, int defStyle) {
         super(ctxt, attrs, defStyle);
-        this.context = ctxt;
         setPositiveButtonText(R.string.ok);
         setNegativeButtonText(R.string.cancel);
         calendar = new GregorianCalendar();
@@ -114,19 +110,23 @@ public class TimePreference extends DialogPreference {
         c.set(java.util.Calendar.HOUR_OF_DAY, 8);
         c.set(java.util.Calendar.MINUTE, 0);
         c.set(java.util.Calendar.SECOND, 0);
-        long timeChosen = PreferenceManager.getDefaultSharedPreferences(context)
+        long timeChosen = PreferenceManager.getDefaultSharedPreferences(getContext())
                 .getLong("notification_hour", c.getTimeInMillis());
         c.setTimeInMillis(timeChosen);
         if(java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY) > c.get(java.util.Calendar.HOUR_OF_DAY)) {
             timeChosen += 24 * 60 * 60 * 1000;
+        } else {
+            if(java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE) > c.get(java.util.Calendar.MINUTE)) {
+                timeChosen += 24 * 60 * 60 * 1000;
+            }
         }
-        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, timeChosen, 24 * 60 * 60 * 1000,
-                PendingIntent.getBroadcast(context, 0, new Intent(context, AlarmReceiver.class), 0));
+                PendingIntent.getBroadcast(getContext(), 0, new Intent(getContext(), AlarmReceiver.class), 0));
     }
 
     public void cancelNotification() {
-        AlarmManager am = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
-        am.cancel(PendingIntent.getBroadcast(context, 0, new Intent(context, AlarmReceiver.class), 0));
+        AlarmManager am = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        am.cancel(PendingIntent.getBroadcast(getContext(), 0, new Intent(getContext(), AlarmReceiver.class), 0));
     }
 }
