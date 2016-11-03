@@ -5,20 +5,17 @@
     android:layout_height="match_parent"
     tools:context="com.ponces.alberto.calendariococo.CalendarViewActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <!-- The ActionBar -->
+
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- The main content view -->
         <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/calendarview_relativelayout"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
@@ -48,15 +45,14 @@
         </RelativeLayout>
         <ImageView
             android:id="@+id/calendarview_imageView2"
-            android:layout_width="@dimen/tab_min_width"
-            android:layout_height="@dimen/tab_min_width"
+            android:layout_width="@dimen/design_tab_scrollable_min_width"
+            android:layout_height="@dimen/design_tab_scrollable_min_width"
             android:layout_marginLeft="30dp"
             android:layout_gravity="left"
             android:src="@drawable/cozinho"
             android:contentDescription="@string/content_description" />
 
         <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/calendarview_relativelayout3"
             android:layout_height="100dp"
             android:layout_width="wrap_content"
@@ -86,8 +82,8 @@
         </RelativeLayout>
         <ImageView
             android:id="@+id/calendarview_imageView4"
-            android:layout_width="@dimen/tab_min_width"
-            android:layout_height="@dimen/tab_min_width"
+            android:layout_width="@dimen/design_tab_scrollable_min_width"
+            android:layout_height="@dimen/design_tab_scrollable_min_width"
             android:layout_marginRight="30dp"
             android:layout_gravity="right"
             android:src="@drawable/cozinho"

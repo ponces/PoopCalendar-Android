@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
+    private View hvDrawer;
     private ActionBarDrawerToggle drawerToggle;
 
     private Controller ctrl;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Find our drawer view
         nvDrawer = (NavigationView) findViewById(R.id.main_nvView);
+        hvDrawer = nvDrawer.inflateHeaderView(R.layout.nav_header);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
@@ -206,9 +209,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateHeader() {
-        TextView textView = (TextView) findViewById(R.id.header_textView);
-        ImageView imageView = (ImageView) findViewById(R.id.header_imageView);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.header_linearLayout);
+        TextView textView = (TextView) hvDrawer.findViewById(R.id.header_textView);
+        ImageView imageView = (ImageView) hvDrawer.findViewById(R.id.header_imageView);
+        LinearLayout linearLayout = (LinearLayout) hvDrawer.findViewById(R.id.header_linearLayout);
         if(table.equals("cozinho")) {
             textView.setText(String.format(getResources().getString(R.string.header_text), "Cózinho"));
             imageView.setImageResource(R.drawable.cozinho);

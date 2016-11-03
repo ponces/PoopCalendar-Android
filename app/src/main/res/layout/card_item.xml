@@ -11,7 +11,7 @@
     android:layout_marginRight="20dp"
     card_view:cardCornerRadius="4dp"
     card_view:cardBackgroundColor="@color/light_brown"
-    card_view:cardElevation="5dp" >
+    card_view:cardElevation="5dp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

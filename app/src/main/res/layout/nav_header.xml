@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/header_imageView"
-        android:layout_width="@dimen/fab_size_normal"
-        android:layout_height="@dimen/fab_size_normal"
+        android:layout_width="@dimen/design_fab_size_normal"
+        android:layout_height="@dimen/design_fab_size_normal"
         android:src="@drawable/cozinho"
         android:contentDescription="@string/content_description" />
 
