@@ -1,10 +1,7 @@
-package com.ponces.alberto.calendariococo;
+package com.ponces.poopcalendar;
 
 import android.annotation.TargetApi;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;

@@ -1,4 +1,4 @@
-package com.ponces.alberto.calendariococo;
+package com.ponces.poopcalendar;
 
 import android.content.DialogInterface;
 import android.content.Intent;

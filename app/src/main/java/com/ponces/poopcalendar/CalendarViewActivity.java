@@ -1,10 +1,10 @@
-package com.ponces.alberto.calendariococo;
+package com.ponces.poopcalendar;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class CalendarViewActivity extends ActionBarActivity {
+public class CalendarViewActivity extends AppCompatActivity {
 
     private Controller ctrl;
     private String date;

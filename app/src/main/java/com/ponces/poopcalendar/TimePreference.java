@@ -1,11 +1,10 @@
-package com.ponces.alberto.calendariococo;
+package com.ponces.poopcalendar;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.graphics.drawable.ColorDrawable;
 import android.preference.DialogPreference;
 import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
@@ -13,7 +12,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TimePicker;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**

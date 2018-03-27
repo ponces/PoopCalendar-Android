@@ -6,7 +6,7 @@
         android:key="switch_notifications"
         android:title="Notifications"
         android:defaultValue="true" />
-    <com.ponces.alberto.calendariococo.TimePreference
+    <com.ponces.poopcalendar.TimePreference
         android:key="notification_hour"
         android:title="@string/pref_title_notification_hour"
         android:dialogTitle="" />

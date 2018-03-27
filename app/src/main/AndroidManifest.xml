@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ponces.alberto.calendariococo" >
+    package="com.ponces.poopcalendar" >
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.ponces.poopcalendar.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,22 +16,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.ponces.poopcalendar.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name=".CalendarActivity"
+            android:name="com.ponces.poopcalendar.CalendarActivity"
             android:label="@string/title_activity_calendar" >
         </activity>
         <activity
-            android:name=".CardsActivity"
+            android:name="com.ponces.poopcalendar.CardsActivity"
             android:label="@string/title_activity_cards" >
         </activity>
         <activity
-            android:name=".CalendarViewActivity"
+            android:name="com.ponces.poopcalendar.CalendarViewActivity"
             android:label="@string/title_activity_calendar_view" >
         </activity>
-        <receiver android:name=".AlarmReceiver" >
+        <receiver android:name="com.ponces.poopcalendar.AlarmReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>

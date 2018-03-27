@@ -1,2 +1,2 @@
-# CalendarioCoco2
-Aplicação Android para aceder ao Calendário Cocó (versão 2)
+# Poop Calendar
+Android Application to access the Poop Calendar

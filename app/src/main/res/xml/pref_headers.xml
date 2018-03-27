@@ -4,10 +4,10 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="com.ponces.alberto.calendariococo.SettingsActivity$GeneralPreferenceFragment"
+        android:fragment="com.ponces.poopcalendar.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
     <header
-        android:fragment="com.ponces.alberto.calendariococo.SettingsActivity$NotificationsPreferenceFragment"
+        android:fragment="com.ponces.poopcalendar.SettingsActivity$NotificationsPreferenceFragment"
         android:title="@string/pref_header_notifications" />
 
 </preference-headers>

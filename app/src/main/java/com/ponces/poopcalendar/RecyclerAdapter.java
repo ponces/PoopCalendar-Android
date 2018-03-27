@@ -1,4 +1,4 @@
-package com.ponces.alberto.calendariococo;
+package com.ponces.poopcalendar;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
